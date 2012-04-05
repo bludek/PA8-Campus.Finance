@@ -1,0 +1,30 @@
+{% extends 'SdzBlogBundle::layout.html.twig' %}
+
+{% block title %}Article list{% endblock %}
+
+{% block body %}
+
+{{ parent() }}
+
+{% for entity in entities %}
+<div class="holder_content1">
+   
+   	<section class="group4">
+		<h1>{{ entity.titre }}</h1>
+   		<img src="{{ asset('bundles/sdzblog/images/icon3.png') }}" width="51" height="52" alt="icons" class="icons"/>
+
+   		<article>
+   			<h2>Postée par {{ entity.pseudo }}{% if entity.date %} le {{ entity.date|date('d/m/Y') }}{% endif%}</h2>
+
+   			<p>{{ entity.contenu }}</p>
+   			<a href="{{ path('article_show', { 'id': entity.id }) }}"><span class="button">Read more</span></a>
+   			<a href="{{ path('article_edit', { 'id': entity.id }) }}"><span class="button">Edit</span></a>
+   		</article> 
+   </section>
+
+</div>
+{% endfor %}
+
+<span class="button2"><a href="{{ path('article_new') }}">Create a news</a></span>
+
+{% endblock %}

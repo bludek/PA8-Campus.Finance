@@ -1,0 +1,25 @@
+Home:
+    pattern: /
+    defaults: { _controller: SdzBlogBundle:Blog:index }
+    
+Bye:
+    pattern: /bye
+    defaults: { _controller: SdzBlogBundle:Blog:bye }
+    
+sdzblog_tagcrud:
+    resource: "routing/tag.yml"
+    prefix: /tag/crud
+    
+sdzblog_articlecrud:
+    resource: "routing/article.yml"
+    prefix: /article/crud
+    
+sdzblog:
+    pattern:  /liste/{page}
+    defaults: { _controller: SdzBlogBundle:Blog:liste, page: 1 }
+    requirements :
+        page: \d+
+    
+sdzblog_voir:
+    pattern:   /view/{slug}
+    defaults:  { _controller: SdzBlogBundle:Blog:voir }

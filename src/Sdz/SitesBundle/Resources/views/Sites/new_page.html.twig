@@ -1,0 +1,66 @@
+{% extends "SdzSitesBundle::layout.html.twig" %}
+
+{% block stylesheets %}
+        <link rel="stylesheet" type="text/css" href="{{ asset('bundles/sdzsites/css/styles_sites.css') }}"  media="screen" />
+        <link rel="stylesheet" type="text/css" href="{{ asset('bundles/sdzblog/css/jquery-ui-1.8.18.custom.css') }}" media="screen" />
+        <link rel="stylesheet" type="text/css" href="{{ asset('bundles/sdzblog/css/chosen.css') }}"/>
+        <link rel="stylesheet" type="text/css" href="{{ asset('bundles/sdzblog/css/sparkbox-select.css') }}"/>
+    {% endblock %}
+
+{% block title %}Créer une page - {{ site }}{% endblock %}
+
+{% block appbar %}
+<form action="{{ url('page_create') }}" method="post" {{ form_enctype(form) }} >
+    <div id="sites-create-site-buttons">
+	<button type="submit" id="createBtn" class="inline-block jfk-button jfk-button-primary" tabindex="0" style="">Créer</button>
+	<div role="button" id="cancelBtn" class="inline-block jfk-button jfk-button-standard" tabindex="0"><a href="{{ url('view_page', {'user':app.user, 'site':site.url, 'name':'accueil'}) }}">Annuler</a></div>
+    </div>
+
+{% endblock %}
+
+{% block main %}
+    
+    <div class="content-wrapper" style="height: 500px; ">
+        <div id="ws-createNewSite" style="background: #fff;">
+            <h1 class="sites-system-page-heading">Créer une page dans le site {{ site }}</h1>
+            <div class="site-clear">
+                <div id="create-site-name">
+                    {{ form_label(form.title, "Donnez un nom à votre page :") }}
+                    {{ form_widget(form.title, {'attr': {'size':'42'} }) }}
+                </div>
+                <div id="create-site-location">
+                    <div id="create-site-location-label">
+                    {{ form_label(form.name, "Url de votre page - ") }}
+                    <span id="create-site-allowed-chars">seuls les caractères suivants sont autorisés dans les URL&nbsp;: A-Z,a-z,0-9</span>
+                    </div>
+                    <span id="create-site-url" dir="ltr" style="margin-right: 5px;">http://campus.finance/site/{{ app.user.username }}/</span>
+                    <span style="margin-left: 22px;">{{ form_widget(form.name, {'attr': {'size':'42'} }) }}</span>
+                </div>
+                <div id="create-site-sharing">
+                    <div class="create-site-form-label">{{ form_label(form.type, "Sélectionner le modèle à utiliser") }}</div>
+                    {{ form_widget(form.type) }}
+                    <script type="text/javascript" src="{{ asset('bundles/sdzblog/js/script.js') }}"></script>
+                </div>
+                <div id="sites-create-page-select-location">
+                    <label class="sites-create-page-form-label" for="pageLoc">Sélectionnez un emplacement...</label>
+                    <div class="sites-create-page-location-option">
+                        <input id="pageLocTopLevelPath" name="pageLoc" type="radio" value="" checked>
+                        <label class="sites-create-page-location-option-label" for="pageLocTopLevelPath">Placer la page à la racine</label>
+                    </div>
+                    <div class="sites-create-page-location-option">
+                        <input type="radio" name="pageLoc" value="home" id="pageLocSelectedPath">
+                        <label class="sites-create-page-location-option-label" for="pageLocSelectedPath">Placer la page sous 
+                            <strong>Accueil</strong>
+                        </label>
+                    </div>
+                    <span id="pageLocTarget" style="padding-bottom: 40px;">‎Accueil‎‎ » ‎Votre nouvelle page‎</span>
+                </div>
+                    
+                    <br><br>
+                    <input type="hidden" name="site" value="{{ site.url }}"> 
+                {{ form_rest(form) }}
+            </div> 
+        </div>
+    </div>
+</form>
+{% endblock %}

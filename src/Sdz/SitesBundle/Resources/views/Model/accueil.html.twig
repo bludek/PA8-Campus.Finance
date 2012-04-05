@@ -1,0 +1,51 @@
+{% extends "SdzSitesBundle:Model:layout_model1.html.twig" %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+	$(function() {
+            $( ".edit-section button" ).button({
+                icons: {
+                    primary: "ui-icon-pencil"
+                },
+                text: false
+            });
+        });
+    </script>
+{% endblock %}
+        
+{% block content %}
+    
+{% set cpt = 0 %}
+
+    {% for section in sections %}
+        {% if section.type == "hero-unit" %}
+            <div class="hero-unit">
+                {{ section.contenu | raw }}
+                 {% if visitor == false  %}<div class="edit-section"><button onclick="window.location = Routing.generate('editSection', {'id':'{{section.id}}' })" style="float: right; height: 30px;">Éditer</button></div>{% endif %}
+            </div>
+            
+        {% endif %}
+        {% if section.type == "span4" %}
+            {% if cpt == 0 %}
+                <div class="row-fluid">
+            {% endif %}
+            
+            <div class="span4">
+                {{ section.contenu | raw  }}
+                <div class="edit-section">
+                    <p><a class="btn" href="#">Lire le chapitre &raquo;</a>{% if visitor == false  %}<button onclick="window.location = Routing.generate('editSection', {'id':'{{section.id}}' })" style="margin-left: 10px; height: 30px;">Éditer</button>{% endif %}</p>
+                </div>
+            </div>
+            
+            {% set cpt = cpt + 1 %}
+            
+            {% if cpt == 3 %}
+                </div>
+                {% set cpt = 0 %}
+            {% endif %}
+        {% endif %}
+
+    {% endfor %}
+    
+{% endblock %}

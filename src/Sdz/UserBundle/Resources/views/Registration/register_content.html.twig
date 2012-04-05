@@ -1,0 +1,126 @@
+
+    {% form_theme form theme %}
+
+    <section class="clearfix">
+        <aside class="side-content">
+            <div class="benefit">
+                <div>
+                    <img src="{{ asset('bundles/sdzblog/images/campus_finance.png') }}" alt="" width="170" height="90" style="float: left; margin-right: 10px; margin-top: 10px; margin-bottom: 90px;">
+                    <div style="width: 250px; float: right;">
+                        <h2>Votre compte Campus Finance, c'est bien plus qu'un compte.</h2>
+                        <p class="greytext">Créez, stockez, partagez et apprennez. Utilisez les produits Campus finance, qu'il s'agisse de notre éditeur de site web, 
+                        de notre logiciel de gestion d'actifs ou de notre simulateur bancaire, à l'aide d'un seul nom d'utilisateur et d'un seul mot de passe. 
+                        Toutes vos informations sont sauvegardées en permanence, et vous pouvez accéder à nos produits n'importe où.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="benefit">
+                <div>
+                    <img src="{{ asset('bundles/sdzblog/images/Finance.png') }}" alt="" width="170" height="180" style="float: left; margin-right: 10px;">
+                    <div style="width: 250px; float: right;">
+                        <h2>Ayez tout à portée de main</h2>
+                        <p class="greytext">Avec un compte Campus Finance, vous pouvez développez votre maîtrise du monde financier depuis n'importe quel appareil. 
+                        Vous pouvez créer votre site web pour partager vos connaissances, contribuez à l'avancement d'un projet, apprendre à utiliser les outils de trading avec notre pricer ou bien gérer votre banque avec notre simulateur.
+                        Tous les outils sont réunis pour connaître toutes les ficelles du monde financier.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="benefit">
+                <div>
+                    <img src="{{ asset('bundles/sdzblog/images/formateur-finance.jpg') }}" alt="" width="170" height="120" style="float: left; margin-right: 10px; margin-top: 45px;">
+                    <div style="width: 250px; float: right;">
+                        <h2>Travaillez aujourd'hui avec les outils de demain</h2>
+                        <p class="greytext">Découvrez une nouvelle ère où tout est possible&nbsp;! Vous pouvez simuler n'importe quel type d'opérations et 
+                        gérer une banque comme si c'était la votre. Placements, actifs, intérêts, portefeuille tout ceci n'aura plus de secret pour vous.</p>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <article class="sign-up">
+            <div class="signup-box">
+                <form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register">
+                    <fieldset>
+                        <legend>Informations requises</legend>
+                        <span class="error">{{ form_errors(form) |trans([], 'SdzUserBundle') }}</span>
+                        <table class="register" cellpadding="0" cellspacing="0" width="100%">
+                            <tbody>
+                                <tr>
+                                    <td class="error">{{ form_errors(form.username) }}</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>{{ form_label(form.username) }}</td>
+                                    <td style="padding-left: 11px;">{{ form_widget(form.username, {'attr': {'size':'49'} }) }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="error">{{ form_errors(form.email) }}</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>{{ form_label(form.email) }}</td>
+                                    <td style="padding-left: 11px;">{{ form_widget(form.email, {'attr': {'size':'49'} }) }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="error">{{ form_errors(form.plainPassword.first) }}</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>{{ form_label(form.plainPassword.first) }}</td>
+                                    <td style="padding-left: 11px;">{{ form_widget(form.plainPassword.first, {'attr': {'size':'49'} }) }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="error">{{ form_errors(form.plainPassword.second) }}</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>{{ form_label(form.plainPassword.second) }}</td>
+                                    <td style="padding-left: 11px;">{{ form_widget(form.plainPassword.second, {'attr': {'size':'49'} }) }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </fieldset>
+
+                    <fieldset style="margin-top: 10px; margin-bottom: 10px;">
+                        <legend>Informations subsidaires</legend>
+                        <table class="register" cellpadding="0" cellspacing="0" width="100%">
+                            <tbody>
+                                <tr>
+                                    <td>Nom</td>
+                                    <td><span style="margin-right:10px;">{{ form_widget(form.first_name, {'attr': {'placeholder':'Prénom'} }) }}</span><span>{{ form_widget(form.last_name, {'attr': {'placeholder':'Nom'} }) }}</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Date de naissance</td>
+                                    <td>{{ form_widget(form.birthday) }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Localisation</td>
+                                    <td>{{ form_widget(form.locality, {'attr': {'placeholder':'Pays'} }) }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </fieldset>
+
+                    <fieldset style="margin-top: 10px; margin-bottom: 10px;">
+                            <legend>N'oubliez de valider les conditions.</legend>
+                    <input type="checkbox" value="yes" name="TermsOfService" id="TermsOfService">
+                    <span id="terms-of-service-label">
+                        <strong>J'accepte les <a id="TosLink" href="#">Conditions d'utilisation</a> et 
+                        les <a id="PrivacyLink" href="#">Règles de confidentialité</a> de Campus finance.</strong>
+                    </span>
+                    </fieldset>
+
+                    {{ form_rest(form) }}
+
+                    <div>
+                        <input class="co-button co-button-submit" type="submit" value="{{ 'registration.submit'|trans({}, 'FOSUserBundle') }}" style="float: right"/>
+                    </div>
+                </form>
+            </div>
+        </article>
+
+
+    </section>

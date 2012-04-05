@@ -1,0 +1,77 @@
+<!doctype html>
+<head>
+    <meta charset="UTF-8">
+
+    <title>{% block title %}{{ app.user.username }} sites{% endblock %}</title>
+
+    {% block stylesheets %}
+        <link rel="stylesheet" type="text/css" href="{{ asset('bundles/sdzsites/css/styles_sites.css') }}" />
+        <link rel="stylesheet" type="text/css" href="{{ asset('bundles/sdzblog/css/jquery-ui-1.8.18.custom.css') }}"/>
+        <link rel="stylesheet" type="text/css" href="{{ asset('bundles/sdzblog/css/chosen.css') }}"/>
+    {% endblock %}
+
+    {% block javascripts %}
+        <script type="text/javascript" src="{{ asset('bundles/sdzblog/js/jquery-1.7.1.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/sdzblog/js/jquery-ui-1.8.18.custom.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/sdzblog/js/i18n/jquery-ui-i18n.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/sdzblog/js/autoresize.jquery.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+        <script type="text/javascript" src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+    {% endblock %}
+</head>
+
+<body>
+    <div class="sites-header-divider" style="position: fixed;">
+	<div id="gb">
+		<div id="gbw">
+			<div id="gbz">
+				<span class="gbtcb"></span>
+				<ol class="gbtc">	
+					<li class="gbt">
+						<a class="gbzt" href="{{ path('Home') }}"><span class="gbtb2"></span>
+						<span class="gbts">+Campus finance</span></a>
+					</li>
+					<li class="gbt">
+						<a class="gbzt" href="#"><span class="gbtb2"></span>
+						<span class="gbts">Boutique</span></a>
+					</li>
+					<li class="gbt">
+						<a class="gbzt" href="#"><span class="gbtb2"></span>
+						<span class="gbts">Contact</span></a>
+					</li>
+					<li class="gbt">
+						<a class="gbzt" href="#"><span class="gbtb2"></span>
+						<span class="gbts">Photos</span></a>
+					</li>
+					<li class="gbt">
+						<a class="gbzt" href="#"><span class="gbtb2"></span>
+						<span class="gbts">Documents</span></a>
+					</li>
+				</ol>
+			</div>
+			
+			<div id="gbg">
+				<span class="gbtcb"></span>
+				<ol class="gbtc">
+					<li class="gbt">
+						<a class="gbgt" href="{{ path('fos_user_profile_show') }}"><span class="gbtb2"></span>
+						<span class="gbts">{{ app.user.username }}</span></a>
+					</li>
+					<li class="gbt">
+						<a class="gbgt" href="{{ path('fos_user_security_logout') }}"><span class="gbtb2"></span>
+						<span class="gbts">{{ 'Déconnexion'|trans([], 'FOSUserBundle') }}</span></a>
+					</li>
+				</ol>
+			</div>
+		</div>
+		
+		<div id="gbx3"></div>
+	</div>
+</div>	
+	{% block body %}{% endblock %}
+	
+
+	
+</body>
+
+</html>

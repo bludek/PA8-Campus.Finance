@@ -1,0 +1,72 @@
+{% extends "SdzSitesBundle::layout.html.twig" %}
+
+{% block title %}Créer un site - {{ app.user }}{% endblock %}
+
+{% block appbar %}
+<form action="{{ path('SdzSitesBundle_create') }}" method="post" {{ form_enctype(form) }} >
+    <div id="sites-create-site-buttons">
+	<button type="submit" id="createBtn" class="inline-block jfk-button jfk-button-primary" tabindex="0" style="">Créer</button>
+	<div role="button" id="cancelBtn" class="inline-block jfk-button jfk-button-standard" tabindex="0"><a href="{{ path('SdzSitesBundle_homepage') }}">Annuler</a></div>
+    </div>
+
+{% endblock %}
+
+{% block main %}
+    <div class="content-wrapper" style="height: 500px; overflow-y: auto;">
+        <div id="ws-createNewSite" style="background: #fff;">
+            <div class="site-clear">
+                <div class="create-site-form-label">Sélectionnez un modèle à utiliser :</div>
+                <div>
+                    <table class="sites-expando-inner">
+                        <tbody>
+                            <tr>
+                                <td role="radiogroup">
+                                    <div class="ws-color" role="radio" aria-checked="true">
+                                        <div class="ws-template-label"><img src="{{ asset('bundles/sdzsites/images/sitetemp.jpg') }}" height="92" width="120"></div>
+                                        <p>
+                                            <input type="radio" name="template" class="templateRadioButton" id="template-blank" value="blank">
+                                            <label for="template-blank" id="template-label-blank">Modèle vierge</label>
+                                        </p>
+                                    </div>
+                                    <div class="ws-color ws-color-selected" role="radio" aria-checked="true">
+                                        <div class="ws-template-label"><img src="{{ asset('bundles/sdzsites/images/template.jpg') }}" height="92" width="120"></div>
+                                        <p>
+                                            <input type="radio" name="template" class="templateRadioButton" id="template-base" value="blank" checked>
+                                            <label for="template-base" id="template-label-base">Modèle Campus Finance</label>
+                                        </p>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="create-site-name">
+                    {{ form_label(form.name, "Attribuez un nom à votre site :") }}
+                    {{ form_widget(form.name, {'attr': {'size':'33'} }) }}
+                </div>
+                <div id="create-site-location">
+                    <div id="create-site-location-label">
+                    {{ form_label(form.url, "Emplacement du site - ") }}
+                    <span id="create-site-allowed-chars">seuls les caractères suivants sont autorisés dans les URL&nbsp;: A-Z,a-z,0-9</span>
+                    </div>
+                    <span id="create-site-url" dir="ltr" style="margin-right: 5px;">http://campus.finance/site/{{ app.user.username }}/</span>
+                    {{ form_widget(form.url, {'attr': {'size':'52'} }) }}
+                </div>
+                <div id="create-site-description">
+                    {{ form_label(form.description, "Description du site") }}
+                    {{ form_widget(form.description) }}
+                </div>
+                <div id="create-site-sharing">
+                    <div class="create-site-form-label">{{ form_label(form.visibility, "Partager avec") }}</div>
+                    <div class="create-site-sharing-option">{{ form_widget(form.visibility.0, {'attr': {'checked':'true'} }) }} {{ form_label(form.visibility.0) }}</div>
+                    <div class="create-site-sharing-option">{{ form_widget(form.visibility.1) }} {{ form_label(form.visibility.1) }}</div>
+                </div>
+                {{ form_rest(form) }}
+            </div> 
+        </div>
+    </div>
+</form>
+<script type="text/javascript">
+        $('textarea').elastic();
+</script>
+{% endblock %}

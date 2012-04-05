@@ -1,0 +1,61 @@
+{% extends "SdzBlogBundle::layout.html.twig" %}
+
+{% block title %}{{ parent() }} - Home{% endblock %}
+
+{% block body %}
+
+{{ parent() }}
+
+<!--start holder-->
+<div class="holder_content1">
+   
+   	<section class="group4">
+		<h1>Latest news</h1>
+   		<img src="{{ asset('bundles/sdzblog/images/icon3.png') }}" width="51" height="52" alt="icons" class="icons"/>
+
+   		<article>
+   			<h2>10.08.2011  -  Internet marketing</h2>
+
+   			<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec molestie. Sed aliquam sem ut arcu. Phasellus sollicitudin. 
+   			Vestibulum condimentum facilisis nulla. In hac habitasse platea dictumst. Nulla nonummy. Cras quis libero.   </p>
+
+   			<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec molestie. Sed aliquam sem ut arcu. Phasellus sollicitudin. 
+  			 Vestibulum condimentum facilisis nulla. In hac habitasse platea dictumst. Nulla nonummy. Cras quis libero. </p>
+   		</article> 
+   </section>
+
+</div>
+<!--end holder-->
+  
+  
+<!--start holder-->
+<div class="holder_content">
+
+   	<section class="group1">
+   		<h1> 1. Creative solutions</h1>
+   		<img src="{{ asset('bundles/sdzblog/images/icon4.png') }}" width="51" height="52" alt="icons" class="icons"/>
+   		<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec molestie. Sed aliquam sem ut arcu. Phasellus sollicitudin. 
+   		Vestibulum condimentum  facilisis nulla. In hac habitasse platea dictumst. Nulla nonummy. Cras quis libero.</p>
+   		<a href=""><span class="button">Read more</span></a>
+   	</section>
+   
+   	<section class="group2">
+  		<h1>2. Consulting</h1>
+   		<img src="{{ asset('bundles/sdzblog/images/icon2.png') }}" width="51" height="52" alt="icons" class="icons"/>
+   		<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec molestie. Sed aliquam sem ut arcu. Phasellus sollicitudin. 
+   		Vestibulum condimentum  facilisis nulla. In hac habitasse platea dictumst. Nulla nonummy. Cras quis libero.</p>
+   		<a href=""><span class="button">Read more</span></a>
+   	</section>
+   
+   	<section class="group3">
+   		<h1>3. Development</h1>
+   		<img src="{{ asset('bundles/sdzblog/images/icon1.png') }}" width="51" height="52" alt="icons" class="icons"/>
+   		<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec molestie. Sed aliquam sem ut arcu. Phasellus sollicitudin. 
+   		Vestibulum condimentum facilisis nulla. In hac habitasse platea dictumst. Nulla nonummy. Cras quis libero.   </p>
+   		<a href=""><span class="button">Read more</span></a>
+   	</section>
+
+</div>
+<!--end holder-->
+
+{% endblock %}

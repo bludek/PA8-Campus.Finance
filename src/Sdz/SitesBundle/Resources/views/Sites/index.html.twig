@@ -1,0 +1,74 @@
+{% extends "SdzSitesBundle::layout.html.twig" %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+	$(function() {
+            $( ".delete button" ).button({
+                icons: {
+                    primary: "ui-icon-trash"
+                },
+                text: false
+            });
+            
+            $( ".restore button" ).button({
+                icons: {
+                    primary: "ui-icon-folder-open"
+                },
+                text: false
+            });
+        });
+    </script>
+{% endblock %}
+
+{% block title %}{{ parent() }}{% endblock %}
+
+{% block main %}
+
+<div class="dash-main" id="siteList" style="height: 500px; overflow-y: auto;">
+	<div class="sites-dashboard-sidebar-wrapper">
+		<ul class="sites-dashboard-sidebar">
+			<li>
+				<div id="ownerCreateBtn" class="inline-block jfk-button jfk-button-primary" tabindex="0"><a href="{{ path('SdzSitesBundle_new') }}">Créer</a></div>
+			</li>
+		</ul>
+		<ul class="sites-dashboard-sidebar">
+                    <li {% if deleted %}{% else %}class="sites-dashboard-sidebar-current"{% endif %}>{% if deleted %}<a href="{{ url('SdzSitesBundle_homepage') }}" style="color:black">Mes sites</a>{% else %}Mes sites{% endif %}</li>
+                    <li {% if deleted %}class="sites-dashboard-sidebar-current"{% endif %}>{% if deleted %}Sites supprimés{% else %}<a href="{{ url('SdzSitesBundle_homepage', {'deleted':'deleted'}) }}" style="color:black">Sites supprimés</a>{% endif %}</li>
+		</ul>
+	</div>
+	<div class="dash-yours dash-inside">
+		{% if entities == null %}
+		<div class="sites-dashboard-content-panel">
+			<div id="sites-table-disclaimer">{% if deleted %}Vous n'avez supprimé aucun site.{% else %}Vous ne disposez actuellement d'aucun site.{% endif %}</div>
+		</div>
+		{% else %}
+		<ul>
+		{% for entity in entities %}
+			<li>
+                            <div class="{% if deleted %}restore {% else %}delete{% endif %}" style="display: inline;">
+                                {% if deleted %}
+                                    <button onclick="window.location = Routing.generate('restoreSite', {'id':'{{ entity.id }}' })" style=" float: right; width: 65px; margin-left: 10px; height: 30px;">Restorer</button>
+                                {% else %}
+                                    <button onclick="window.location = Routing.generate('deleteSite', {'id':'{{ entity.id }}' })" style=" float: right; width: 65px; margin-left: 10px; height: 30px;">Supprimer</button>
+                                {% endif %}
+                            </div>
+                            <a href="{{ url('view_page',{'user': app.user.username, 'site': entity.url, 'name':'accueil'}) }}" class="your-site-title">{{ entity.name }}</a>
+                            <span class="site-shared-with">
+                            {% if entity.visibility %}
+                                    Mode production
+                            {% elseif deleted == false %}
+                                    Mode développement
+                            {% else %}
+                                    <br>description : {{ entity.description }}
+                            {% endif %}
+                            </span>
+                            <span class="sites-dash-site-url">http://www.campus.finance/sites/{{ app.user}}/{{ entity.url }}</span>
+			</li>
+		{% endfor %}
+		</ul>
+		{% endif %}
+	</div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,86 @@
+editSection:
+    pattern: /sites/section/edit/{id}
+    defaults: { _controller: SdzSitesBundle:Sites:editSection }
+    options:
+        expose: true
+
+cancelMenuAction:
+    pattern: /sites/cancel/action
+    defaults: { _controller: SdzSitesBundle:Sites:cancelMenu }
+    options:
+        expose: true
+        
+deleteMenuAction:
+    pattern: /sites/delete/action
+    defaults: { _controller: SdzSitesBundle:Sites:deleteMenu }
+    options:
+        expose: true
+        
+deleteSite:
+    pattern: /sites/delete/site/{id}
+    defaults: { _controller: SdzSitesBundle:Sites:deleteSite }
+    options:
+        expose: true
+
+restoreSite:
+    pattern: /sites/restore/site/{id}
+    defaults: { _controller: SdzSitesBundle:Sites:restoreSite }
+    options:
+        expose: true
+        
+createMenu:
+    pattern: /sites/create/menu
+    defaults: { _controller: SdzSitesBundle:Sites:createMenu }
+    options:
+        expose: true
+
+sortableMenu:
+    pattern: /sites/sortableMenu
+    defaults: { _controller: SdzSitesBundle:Sites:sortableMenu }
+    options:
+        expose: true
+
+delete_page:
+    pattern: /sites/page_delete/{id}
+    defaults: { _controller: SdzSitesBundle:Sites:deletePage }
+    options:
+        expose: true
+        
+new_page:
+    pattern: /sites/{user}/{site}/createPage
+    defaults: { _controller: SdzSitesBundle:Sites:newPage }
+    options:
+        expose: true
+
+edit_menu:
+    pattern: /sites/{user}/{site}/apparence/pageElements
+    defaults: { _controller: SdzSitesBundle:Sites:editMenu }
+    options:
+        expose: true
+    
+page_create:
+    pattern:  /page/create
+    defaults: { _controller: SdzSitesBundle:Sites:createPage }
+    requirements: { _method: post }
+    
+view_page:
+    pattern: /sites/{user}/{site}/{name}/{visitor}
+    defaults: { _controller: SdzSitesBundle:Sites:view, visitor: false }
+    options:
+        expose: true
+      
+SdzSitesBundle_homepage:
+    pattern:  /sites/{deleted}
+    defaults: { _controller: SdzSitesBundle:Sites:index, deleted:false }
+    
+SdzSitesBundle_new:
+    pattern:  /create-new-site
+    defaults: { _controller: SdzSitesBundle:Sites:new }
+    options:
+        expose: true
+
+SdzSitesBundle_create:
+    pattern:  /create
+    defaults: { _controller: SdzSitesBundle:Sites:create }
+    requirements: { _method: post }
+    

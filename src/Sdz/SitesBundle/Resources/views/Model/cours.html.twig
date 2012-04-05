@@ -1,0 +1,41 @@
+{% extends "SdzSitesBundle:Model:layout_model1.html.twig" %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+	$(function() {
+            $( ".edit-section button" ).button({
+                icons: {
+                    primary: "ui-icon-pencil"
+                },
+                text: false
+            });
+        });
+    </script>
+{% endblock %}
+    
+{% block content %}
+
+    <div class="row-fluid">
+        
+        {% for section in sections %}
+        <div class="span12">
+            {% if visitor == false %}
+            <div class="edit-section" style="display: inline;">        
+                    <button onclick="window.location = Routing.generate('editSection', {'id':'{{ section.id }}' })" style=" float: right; width: 65px; margin-left: 10px; height: 30px;">Éditer</button>
+            </div>
+            {% endif %}
+            {{ section.contenu | raw }}
+            
+            <div class="edit-section" style="margin-top: 30px;">
+                <p><a class="btn" href="#"><i class="icon-file"></i>  Télécharger en PDF &raquo;</a>
+                {% if visitor == false  %}
+                    <button onclick="window.location = Routing.generate('editSection', {'id':'{{ section.id }}' })" style="float: right; width: 65px; margin-left: 10px; height: 30px;">Éditer</button></p>  
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+        
+    </div><!--/row-->
+    
+{% endblock %}

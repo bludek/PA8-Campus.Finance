@@ -1,0 +1,14 @@
+<div class="well sidebar-nav">
+    <ul class="nav nav-list">
+        {% for element in sidebar %}
+            <li class="nav-header">{{ element }}</li>
+            {% for link in element.links %}
+                <li><a href="{% if link.page %}{{ url('view_page',{'user': app.user.username, 'site': element.site.url, 'name': link.page.name}) }}{% else %}#{% endif %}"><i class="icon-book"></i>{{ link }}</a></li>
+            {% endfor %}
+        {% endfor %}
+    </ul>
+        
+</div>
+{% if visitor == false  %}
+<a href="{{ url('edit_menu', {'user':app.user.username, 'site':page.site.url}) }}" style="padding-left: 15px;">Modifier la barre latérale</a> 
+{% endif %}

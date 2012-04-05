@@ -1,0 +1,12 @@
+{% extends "SdzBlogBundle::layout.html.twig" %}
+
+{% block title %}{{ parent() }} - {{ slug }} {% endblock %}
+
+{% block body %}
+   	<h1>Lecture d'un article</h1>
+
+    <p>
+        Ici nous pourrons lire l'article ayant comme slug : {{ slug }}<br />
+        Mais pour l'instant, nous ne savons pas encore le faire, cela viendra !
+    </p>
+{% endblock %}

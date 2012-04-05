@@ -1,0 +1,30 @@
+{% extends "::layout_facade.html.twig" %}
+
+{% block body %}
+
+<script src="{{ asset('bundles/sdzblog/js/slides.min.jquery.js') }}" type="text/javascript"></script>
+	<script>
+	$(function(){
+		$('#slides').slides({
+			preload: true,
+			preloadImage: "{{ asset('bundles/sdzblog/images/loading.gif') }}",
+			play: 5000,
+			pause: 2500,
+			hoverPause: true
+		});
+	});
+</script>	
+	
+<!--start intro-->
+<section id="intro">
+	<div id="slides">
+		<div class="slides_container">
+                    <a href="{{ path('Home') }}"><img src="{{ asset('bundles/sdzblog/images/banner1.png') }}" width="960" height="300" alt="baner"></a>
+                    <a href="{{ path('Home') }}"><img src="{{ asset('bundles/sdzblog/images/banner1.png') }}" width="960" height="300" alt="baner"></a>
+                    <a href="{{ path('Home') }}"><img src="{{ asset('bundles/sdzblog/images/banner1.png') }}" width="960" height="300" alt="baner"></a>
+   		</div>
+   	</div>
+</section>
+<!--end intro-->
+
+{% endblock %}

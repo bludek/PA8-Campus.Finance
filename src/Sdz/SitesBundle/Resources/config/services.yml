@@ -1,0 +1,7 @@
+parameters:
+#    sdz_sites.example.class: Sdz\SitesBundle\Example
+
+services:
+#    sdz_sites.example:
+#        class: %sdz_sites.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

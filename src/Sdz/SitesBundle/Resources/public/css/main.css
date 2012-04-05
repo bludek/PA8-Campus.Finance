@@ -1,0 +1,262 @@
+.sites-header-divider {
+    font-size: 13px;
+    background: white;
+    border-bottom: none;
+    font-family: arial,sans-serif!important;
+}
+
+.sites-clear::after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+
+#gb, #gbu {
+    height: 28px !important;
+}
+
+#gb {
+    height: 28px;
+    -moz-user-select: none;
+    -o-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+#gb {
+font: 13px/27px Arial,sans-serif;
+height: 28px;
+}
+
+#gb #gbu {
+top: 0px;
+}
+
+#gbu {
+padding: 2px 0 0 !important;
+}
+
+#gb, #gbu {
+height: 28px !important;
+}
+
+#gbu {
+float: right;
+height: 30px;
+margin-right: 28px;
+padding-bottom: 0;
+padding-top: 20px;
+}
+
+#gbu, #gbq1, #gbq3 {
+z-index: 987;
+}
+
+.gbtc, .gbmc, .gbmcc {
+display: block;
+list-style: none;
+margin: 0;
+padding: 0;
+}
+
+ol {
+display: block;
+list-style-type: decimal;
+-webkit-margin-before: 1em;
+-webkit-margin-after: 1em;
+-webkit-margin-start: 0px;
+-webkit-margin-end: 0px;
+-webkit-padding-start: 40px;
+}
+
+#gbu .gbt {
+margin-left: 15px;
+}
+
+.gbt {
+position: relative;
+display: -moz-inline-box;
+display: inline-block;
+line-height: 27px;
+padding: 0;
+vertical-align: top;
+}
+
+li {
+display: list-item;
+text-align: -webkit-match-parent;
+}
+
+#gbu .gbgt {
+color: #666;
+}
+
+#gbg4 {
+padding-right: 16px;
+}
+
+.gbzt, .gbgt {
+cursor: pointer;
+display: block;
+text-decoration: none !important;
+}
+
+#gbg6 #gbi4t, #gbg4 #gbgs4d {
+color: #666;
+text-shadow: none;
+}
+
+#gbgs4d {
+font-size: 11px;
+}
+
+#gbgs4d {
+display: block;
+position: relative;
+}
+
+#sites-page-info-bar.sites-og-leaf-page {
+min-height: 40px;
+-moz-box-shadow: 0px 3px 2px rgba(0,0,0,0.2);
+}
+
+#sites-page-info-bar {
+min-height: 57px;
+border-bottom: 0;
+-moz-transition: opacity 0.218s;
+-o-transition: opacity 0.218s;
+-webkit-transition: opacity 0.218s;
+transition: opacity 0.218s;
+-webkit-box-shadow: 0px 2px 4px rgba(0,0,0,0.2);
+-moz-box-shadow: 0px 2px 4px rgba(0,0,0,0.2);
+-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=1, Direction=135, Color='#000000')0000\000027)";
+box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+#sites-page-info-bar {
+font-size: 17px;
+color: #666;
+position: relative;
+font-family: Arial,san-serif!important;
+background-color: white;
+border-bottom: 1px solid #CCC;
+}
+
+.sites-og-leaf-page .collaborator-bar-container {
+overflow: visible;
+}
+
+.sites-og-leaf-page .collaborator-bar-container, .sites-og-leaf-page #sites-editor-savecancel {
+padding-top: 4px!important;
+z-index: 2;
+}
+
+.collaborator-bar-container, #sites-editor-savecancel {
+margin-right: 34px;
+}
+.collaborator-bar-container {
+min-height: 36px;
+width: 100%;
+
+}
+
+.sites-og-leaf-page .sites-app-title {
+position: absolute;
+top: -8px;
+}
+
+.sites-app-title {
+padding-left: 38px!important;
+position: relative!important;
+margin-left: 0!important;
+}
+
+.sites-app-title {
+color: #03C;
+letter-spacing: .5px;
+padding: 0;
+background-color: white;
+float: left;
+margin-left: 7px;
+position: absolute;
+left: 0px;
+}
+
+span[dir=ltr] {
+unicode-bidi: embed;
+direction: ltr;
+}
+
+.sites-site-name {
+font-size: 20px;
+padding: 4px 2px 4px 6px;
+margin-right: 6px;
+color: #333!important;
+}
+
+.sites-site-name {
+letter-spacing: 0;
+}
+
+.sites-app-title a {
+text-decoration: none;
+}
+
+.sites-site-name-link {
+float: left;
+}
+
+
+.sites-collaborator-bar-back-arrow {
+height: 16px;
+margin: 5px 0 5px -20px;
+position: absolute;
+background-position: -16px 0;
+width: 15px;
+opacity: 0;
+}
+
+.sites-camelot-icon {
+background-image: url(../images/camelot.png);
+display: inline-block;
+}
+
+.sites-site-name:hover,.sites-site-name:focus{background-color:#eee!important}
+.sites-site-name:hover .sites-collaborator-bar-back-arrow,.sites-site-name:focus .sites-collaborator-bar-back-arrow{opacity:.55}
+.sites-collaborator-bar-back-arrow:hover{opacity:1!important}
+
+#sites-revision-info {
+font-size: 11px;
+color: #666;
+letter-spacing: 0;
+}
+
+#sites-collaborator-buttons {
+font-size: 11px;
+text-align: right;
+padding: 0;
+clear: none;
+position: absolute;
+right: 0px;
+}
+
+#page-btns {
+padding: 0!important;
+padding-right: 34px!important;
+}
+
+#page-btns {
+
+}
+
+ul.site-menu-action
+{
+    position: absolute; z-index: 10; text-align: left;
+}
+
+ul.site-menu-action li
+{
+    
+}

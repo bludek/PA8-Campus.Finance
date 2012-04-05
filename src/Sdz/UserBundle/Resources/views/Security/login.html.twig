@@ -1,0 +1,57 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% block fos_user_content %}
+
+    <aside class="sign-in">
+        <div class="signin-box">
+            <h2><strong>Connexion</strong></h2>
+            {% if error %}
+                <div class="error" style="margin-bottom: 10px; margin-top: 5px;">{{ error|trans([], 'SdzUserBundle') }}</div>
+            {% endif %}
+            <form action="{{ path("fos_user_security_check") }}" method="post">
+                <label for="username">
+                    <strong class="username-label">{{ 'security.login.username'|trans({}, 'FOSUserBundle') }}</strong>
+                    <input type="text" id="username" name="_username" value="{{ last_username }}" />
+                </label>
+
+                <label for="password">
+                    <strong class="passwd-label">{{ 'security.login.password'|trans({}, 'FOSUserBundle') }}</strong>
+                    <input type="password" id="password" name="_password" />
+                </label>
+
+                <input type="submit" class="co-button co-button-submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}" />
+
+                <label class="remember">
+                    <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
+                    <strong class="remember-label">{{ 'security.login.remember_me'|trans({}, 'FOSUserBundle') }}</strong>
+                </label>
+            </form>
+            <ul>
+                <li><a href="{{ path('fos_user_resetting_request') }}">Mot de passe oublié ?</a></li> 
+            </ul>
+        </div>
+
+        <div class="signin-box">
+            <p><a href="{{ path('fos_user_registration_register') }}">Créer un compte</a></p>
+        </div>
+    </aside>
+
+    <article class="product-info jotspot">
+        <div class="product-headers">
+            <h1 class="redtext">Sites</h1>
+        </div>
+        <h2>Vous envisagez de créer un site Web ?</h2>
+        <p>Campus Finance constitue un moyen facile de créer et de partager gratuitement des pages Web. </br>
+                En savoir plus.</p>
+        <img class="infographic" alt="" width="290" height="225" src="{{ asset('bundles/sdzuser/images/sites_pieces-290x225.png') }}">
+        <ul>
+            <li><span>Créez</span> des pages Web enrichies en toute simplicité</li>
+            <li><span>Rassemblez</span> toutes vos informations en un seul emplacement</li>
+            <li><span>Contrôlez</span> les droits d'affichage et de modification</li>
+        </ul>
+        <p>
+            <span style="color:#f00;">Nouveauté !</span> <a href="">Créez un site à l'aide de dizaines de modèles pré-définis</a>
+        </p>
+    </article>
+
+{% endblock fos_user_content %}

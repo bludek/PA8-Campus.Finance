@@ -1,0 +1,228 @@
+{% extends "SdzSitesBundle::layout.html.twig" %}
+{% set nb_sidebar = sidebar | length %}
+{% block stylesheets %}{{ parent() }}
+    <style>
+           #sortable-sidebar a { color:#666;}
+           #sortable-sidebar a:hover { text-decoration: underline; }
+           #dialog-form {height: 500px; zoom: 90%}
+           label { display: block; padding-left: 15px; text-indent: -15px; padding-bottom: 7px; }
+           input { width: 13px; height: 13px; padding-bottom: 7px; margin:0; vertical-align: bottom; position: relative; top: -1px; overflow: hidden; }
+           input.text { margin-bottom:12px; width:95%; padding: .4em; }
+           fieldset { padding:0; border:0; margin-top:25px;}
+   </style>
+{% endblock %}
+    
+{% block javascripts %}
+    {{ parent() }}
+<script>
+        var nb   = {{ nb_sidebar }};
+        var site = '{{ site.url }}';
+        var user = '{{ app.user.username }}';
+        function deleteMenu( id, key )
+        {
+            var toString = 'id=' + id + '&site=' + site;
+            var elt = document.getElementById( 'sidebar-' + key );
+            
+            $.ajax ( { type: "POST", url: Routing.generate('deleteMenuAction'), data: toString, complete: function(data){ 
+                    console.log(data);
+                    elt.style.visibility="hidden";
+                    elt.style.height=0;
+                    elt.style.padding=0;
+                    elt.style.margin=0;
+                    elt.style.border="none";
+                } });
+        }
+        
+        function cancelAction()
+        {
+            var toString = 'site=' + site;
+            $.ajax ( {
+                type: "POST", url: Routing.generate('cancelMenuAction'), data: toString, complete: function(data)
+                { 
+                    console.log(data);
+                    window.location = Routing.generate('view_page', {'user':user, 'site':site, 'name':'accueil'});
+                } 
+            });
+        }
+            
+	$(function() {
+                        
+            $( "#dialog:ui-dialog" ).dialog( "destroy" );
+		
+		var name = $( "#name" ),
+			allFields = $( [] ).add( name ),
+			tips = $( ".validateTips" );
+
+		function updateTips( t ) {
+			tips
+				.text( t )
+				.addClass( "ui-state-highlight" );
+			setTimeout(function() {
+				tips.removeClass( "ui-state-highlight", 1500 );
+			}, 500 );
+		}
+
+		function checkLength( o, n, min, max ) {
+			if ( o.val().length > max || o.val().length < min ) {
+				o.addClass( "ui-state-error" );
+				updateTips( "La taille du " + n + " doit être comprise entre " +
+					min + " et " + max + "." );
+				return false;
+			} else {
+				return true;
+			}
+		}
+
+		function checkRegexp( o, regexp, n ) {
+			if ( !( regexp.test( o.val() ) ) ) {
+				o.addClass( "ui-state-error" );
+				updateTips( n );
+				return false;
+			} else {
+				return true;
+			}
+		}
+		
+		$( "#dialog-form" ).dialog({
+			autoOpen: false,
+			height: 500,
+			width: 350,
+			modal: true,
+			buttons: {
+				"Ajouter le menu": function() {
+					var bValid = true;
+					allFields.removeClass( "ui-state-error" );
+                                        
+					bValid = bValid && checkLength( name, "nom", 3, 50 );
+
+					if ( bValid ) 
+                                        {
+                                            var htmlPages = $( ".page" );
+                                            var pages = new Array();
+                                            for (i=0; i< htmlPages.length; i++)
+                                            { 
+                                                if (htmlPages[i].checked) pages.push(htmlPages[i].value);
+                                            };
+                                            var toString = 'position=' + nb + '&name=' + name.val() + '&pages=' + pages + '&site=' + site;
+                                            $.ajax ( { type: "POST", url: Routing.generate('createMenu'), data: toString, complete: function(data){ console.log(data); } });
+                                            
+                                            $( "#sortable-sidebar" ).append( 
+                                                "<li id=\"sidebar-" + nb + "\" class=\"ui-state-default\" style=\"height:30px;\"><span class=\"ui-icon ui-icon-grip-dotted-vertical\"></span>" + name.val() + "<br> <a href=\"\">modifier</a> - <a href=\"\">supprimer</a></li>"
+                                            );
+                                            nb += 1;    
+                                            $( this ).dialog( "close" );
+					}
+				},
+				Annuler: function() {
+					$( this ).dialog( "close" );
+				}
+			},
+			close: function() {
+				allFields.val( "" ).removeClass( "ui-state-error" );
+			}
+		});
+            
+            $("#createBtn").click(function() {
+                var result_header  = $( "#sortable-header" ).sortable('toArray');
+                var result_sidebar = $( "#sortable-sidebar" ).sortable('toArray');
+                var toString = 'result_header=' + result_header + '&result_sidebar=' + result_sidebar + '&site=' + site;
+                $.ajax ( { type: "POST", url: Routing.generate('sortableMenu'), data: toString, complete: function(data){ window.location = Routing.generate('view_page', {'user':user, 'site':site, 'name':'accueil'}); }});
+            });
+    
+            $( "#add-element-button-header" )
+			.button()
+			.click(function() {
+				$( "#dialog-form-header-link" ).dialog( "open" );
+			});
+                        
+            $( "#add-element-button-sidebar" )
+                        .button()
+			.click(function() {
+				$( "#dialog-form" ).dialog( "open" );
+			});
+            
+            $( "#sortable-header" ).sortable();
+            $( "#sortable-header" ).disableSelection();
+            
+            $( "#sortable-sidebar" ).sortable();
+            $( "#sortable-sidebar" ).disableSelection();
+	});
+	</script>
+{% endblock %}
+    
+{% block title %}Apparence du site - {{ site }}{% endblock %}
+
+{% block name_dash_appbar %}Gérer le site{% endblock %}
+
+{% block appbar %}
+    <div id="sites-create-site-buttons">
+	<button type="submit" id="createBtn" class="inline-block jfk-button jfk-button-primary" tabindex="0" style="">Enregistrer</button>
+        <div role="button" id="cancelBtn" class="inline-block jfk-button jfk-button-standard" tabindex="0"><a href="javascript:;" onclick="cancelAction()">Annuler</a></div>
+    </div>
+
+{% endblock %}
+
+{% block main %}
+    
+    <div id="dialog-form" title="Créer un nouveau menu">
+	<p class="validateTips">* Champs obligatoires.</p>
+
+	<form>
+	<fieldset>
+		<label for="name">Nom*</label>
+		<input type="text" name="name" id="name" class="text ui-widget-content ui-corner-all" />
+                {% for page in pages %}
+                <label><input type="checkbox" name="page-{{ page.id }}" class="page" value="{{ page.name }}">{{ page.name }}</label>
+                {% endfor %}
+	</fieldset>
+	</form>
+    </div>
+        
+    <div class="content-wrapper">
+        <div id="ws-createNewSite" style="background: #fff;">
+            <h1 class="sites-system-page-heading">Modifier l'apparence du site {{ site }} </h1>
+            <div class="site-clear">
+                <div id="layoutBoxes" class="goog-ws-layout-boxes goog-ws-layout-goog-ws-nofoot">
+                    <div id="previewBody" class="goog-ws-layout-goog-ws-left sites-clear">
+                        <div class="goog-ws-layout-header sites-clear">
+                            <p class="goog-ws-blue-text" style="display: inline-block"><strong>En-tête : </strong></p>
+                            <ul id="sortable-header">
+                                {% for key, element in header.links %}
+                                    <li id="header-{{ key }}" class="ui-state-default" style="width:75px; padding-left: 32px;"><span class="ui-icon ui-icon-grip-dotted-vertical"></span>{{ element }}</li>
+                                {% endfor %}
+                            </ul>
+                            <div style="padding-left:2px;"><button id="add-element-button-header">Ajouter un élément</button></div>
+                        </div>
+                        <div class="goog-ws-layout-box goog-ws-big">
+                            <div class="goog-ws-layout-box-inside">
+                                <p class="goog-ws-blue-text"><strong>Contenu de la page</strong></p>
+                                <p>Cette zone est réservée au contenu du site.</p>
+                            </div>
+                        </div>
+                        <div class="goog-ws-layout-sidebar">
+                            <p class="goog-ws-blue-text"><strong>Barre latérale&nbsp;:</strong></p>
+                            <div id="sidebarElements" class="goog-ws-layout-box-inside">
+                                <ul id="sortable-sidebar">
+                                    {% for key, element in sidebar %}
+                                        <li id="sidebar-{{ key }}" class="ui-state-default" style="height:30px;"><span class="ui-icon ui-icon-grip-dotted-vertical"></span>{{ element }}<br>
+                                            <a href="javascript:;" onclick="">modifier</a> - 
+                                            <a href="javascript:;" onclick="deleteMenu({{ element.id }}, {{key}})">supprimer</a></li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                            <div style="margin-top:60px;"><button id="add-element-button-sidebar" style="width:100%">Ajouter un élément</button></div>
+                        </div>
+                    </div>
+                    <div class="goog-ws-layout-system-footer">
+                        <p class="goog-ws-blue-text"><strong>Pied de page :</strong></p>
+                        <p>
+                        <a href="" id="customizeSystemFooterBtn">personnaliser les liens du pied de page</a>
+                        </p>
+                    </div>
+                </div>
+                </div>
+        </div>
+    </div>
+
+<br><br><br><br><br><br>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "SdzBlogBundle::layout.html.twig" %}
+
+{% block title %}{{ parent() }} - Au revoir{% endblock %}
+
+{% block body %}
+
+{{ parent() }}
+
+<div class="holder_content1">
+   
+	<section class="group4">
+		<h1>Good Bye World !</h1>
+   		<img src="{{ asset('bundles/sdzblog/images/icon3.png') }}" width="51" height="52" alt="icons" class="icons"/>
+
+   		<article>
+   			<h2>10.08.2011  -  Good Bye</h2>
+
+   			<p>Good Bye world est un test pour voir si tout marche correctement. </p>
+
+   			<p>Apparemment ça va ! </p>
+   		</article> 
+	</section>
+
+</div>
+{% endblock %}

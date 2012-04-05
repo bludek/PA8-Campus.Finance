@@ -1,0 +1,26 @@
+{% extends "::layout_sites.html.twig" %}
+
+{% block title %}{{ parent() }}{% endblock %}
+
+{% block body %}
+
+<div class="sites-dash-appbar" style="padding-top: 30px; position: fixed; width: 100%;">
+	<div class="sites-dash-appbar-content">
+		<div class="sites-dash-appbar-left inline-block">{% block name_dash_appbar %}Sites{% endblock %}</div>
+		<div class="sites-dash-appbar-center inline-block" style="margin-bottom:4px;">
+		{% block appbar %}{% endblock %}
+		</div>
+		<div class="sites-dash-appbar-right inline-block"></div>
+	</div>
+</div>
+
+<div style="padding-top: 90px; ">
+{% block main %}{% endblock %}
+</div>
+
+<div class="sites-dash-footer" style="margin-top: 20px; position: fixed; z-index: 10;">
+	<span class="sites-dash-footer-content">
+        © Campus finance 2012 | <a href="">Conditions </a> | <a href=""> Centre d'aide</a>
+	</span>
+</div>
+{% endblock %}

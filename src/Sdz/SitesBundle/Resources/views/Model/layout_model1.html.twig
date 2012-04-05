@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <title>{{ page.title }}</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+<!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+<!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<!-- Le styles -->
+    {% block sytlesheets %}
+        <link href="{{ asset('bundles/sdzsites/css/bootstrap.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('bundles/sdzsites/css/main.css') }}" rel="stylesheet">
+        <link href="{{ asset('bundles/sdzblog/css/jquery-ui-1.8.18.custom.css') }}" rel="stylesheet" type="text/css" media="screen" />
+        <style type="text/css">
+        body {
+            padding-top: 60px;
+            padding-bottom: 40px;
+        }
+        .sidebar-nav {
+            padding: 9px 0;
+        }
+        </style>
+    {% endblock %}
+        
+    {% block javascripts %}
+        <script type="text/javascript" src="{{ asset('bundles/sdzblog/js/jquery-1.7.1.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/sdzblog/js/jquery-ui-1.8.18.custom.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/sdzblog/js/i18n/jquery-ui-i18n.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/sdzblog/js/autoresize.jquery.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/sdzsites/js/button-toolbar.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+        <script type="text/javascript" src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+    {% endblock %}    
+</head>
+
+<body>
+    
+  
+    <div class="navbar navbar-fixed-top">
+        {% if visitor == false  %}
+        {% include "SdzSitesBundle:Model:site_toolbar.html.twig" %}
+        {% endif %}
+        {% block header %}
+            {% include "SdzSitesBundle:Model:header.html.twig" %}
+        {% endblock %}
+    </div>
+    <div {% if visitor == false  %}style="margin-top: 70px;"{% endif %}>
+    <div class="container-fluid">
+        <div class="row-fluid">
+        <div class="span3">
+            {% include "SdzSitesBundle:Model:sidebar.html.twig" %}
+        </div><!--/span-->
+
+        <div class="span9">
+            {% block content %}{% endblock %}
+        </div><!--/span-->
+        </div><!--/row-->
+
+        <hr>
+
+        <footer style="margin-bottom: 0px;">
+            <p>&copy; Campus Finance 2012 - Tous droits réservés</p>
+        </footer>
+
+    </div>
+    </div>
+</body>
+</html>

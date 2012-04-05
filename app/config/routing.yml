@@ -1,0 +1,19 @@
+SdzSitesBundle:
+    resource: "@SdzSitesBundle/Resources/config/routing.yml"
+    prefix:   /
+
+SdzUserBundle:
+    resource: "@SdzUserBundle/Resources/config/routing.yml"
+    prefix:   /sdz
+
+SdzBlogBundle:
+    resource: "@SdzBlogBundle/Resources/config/routing.yml"
+    prefix:   /blog
+
+fos_js_routing:
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
+    
+# Internal routing configuration to handle ESI
+#_internal:
+#   resource: "@FrameworkBundle/Resources/config/routing/internal.xml"
+#   prefix:   /_internal
